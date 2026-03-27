@@ -1,0 +1,738 @@
+/* ================================================================
+   Daniel Leber — Illustration & Musikproduktion
+   style.css
+   ================================================================ */
+
+/* ─── Google Fonts (alternativ via HTML <link> einbinden) ────── */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ─── CSS Variables ──────────────────────────────────────────── */
+:root {
+  --ink:        #0d0d0d;
+  --paper:      #f5f0e8;
+  --cream:      #ede8da;
+  --rust:       #c94f2a;
+  --gold:       #d4a843;
+  --teal:       #2a7b7b;
+  --smoke:      #888070;
+  --ff-display: 'Bebas Neue', sans-serif;
+  --ff-serif:   'DM Serif Display', serif;
+  --ff-mono:    'Space Mono', monospace;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ff-mono);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+/* ─── Grain Overlay ──────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+}
+
+/* ─── Navigation ─────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: rgba(245, 240, 232, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(13, 13, 13, 0.08);
+}
+
+.nav-logo {
+  font-family: var(--ff-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--smoke);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--rust);
+}
+
+/* ─── Hero ───────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 70px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5rem 3rem 5rem 5rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+h1.hero-name {
+  font-family: var(--ff-display);
+  font-size: clamp(5rem, 10vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+
+h1.hero-name span {
+  color: var(--rust);
+}
+
+.hero-tagline {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--smoke);
+  margin-top: 1.8rem;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
+  margin: 2rem 0;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-desc {
+  max-width: 400px;
+  color: var(--smoke);
+  line-height: 1.9;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+
+.hero-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1.2rem;
+  animation: fadeUp 0.8s 0.5s ease both;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  transition: all 0.25s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn-fill {
+  background: var(--rust);
+  border-color: var(--rust);
+  color: #fff;
+}
+
+.btn-fill:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* ─── Hero Right ─────────────────────────────────────────────── */
+.hero-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: fadeIn 1s 0.3s ease both;
+}
+
+.hero-right::before {
+  content: 'DL';
+  font-family: var(--ff-display);
+  font-size: 40vw;
+  color: var(--cream);
+  position: absolute;
+  right: -5vw;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-art-block {
+  position: relative;
+  z-index: 1;
+  width: 320px;
+  height: 420px;
+}
+
+.hero-art-block svg {
+  width: 100%;
+  height: 100%;
+}
+
+.floating-badge {
+  position: absolute;
+  bottom: -20px;
+  right: -30px;
+  width: 110px;
+  height: 110px;
+  background: var(--rust);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--ff-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: #fff;
+  line-height: 1.2;
+  animation: spin 20s linear infinite;
+}
+
+/* ─── Section Shared Styles ──────────────────────────────────── */
+section {
+  padding: 6rem 5rem;
+}
+
+.section-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 0.8rem;
+}
+
+.section-title {
+  font-family: var(--ff-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+
+.section-sub {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  color: var(--smoke);
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+}
+
+/* ─── About ──────────────────────────────────────────────────── */
+#about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+#about .section-label { color: var(--gold); }
+#about .section-title  { color: var(--paper); }
+#about .section-sub    { color: var(--smoke); }
+
+.about-text p {
+  color: rgba(245, 240, 232, 0.75);
+  line-height: 2;
+  margin-bottom: 1rem;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.stat {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.2rem;
+}
+
+.stat-num {
+  font-family: var(--ff-display);
+  font-size: 3rem;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-top: 0.3rem;
+}
+
+.about-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.about-frame {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(212, 168, 67, 0.3);
+  position: relative;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.about-frame svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Illustration ───────────────────────────────────────────── */
+#illustration {
+  background: var(--paper);
+}
+
+.illus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.illus-item {
+  position: relative;
+  overflow: hidden;
+  cursor: crosshair;
+  background: var(--cream);
+}
+
+.illus-item:nth-child(1) { grid-column: span 2; aspect-ratio: 16 / 9; }
+.illus-item:nth-child(2) { aspect-ratio: 3 / 4; }
+.illus-item:nth-child(3) { aspect-ratio: 1; }
+.illus-item:nth-child(4) { aspect-ratio: 1; }
+.illus-item:nth-child(5) { aspect-ratio: 3 / 4; }
+
+.illus-item svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.illus-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+}
+
+.illus-item:hover .illus-overlay {
+  opacity: 0.85;
+}
+
+.illus-overlay span {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  color: var(--paper);
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.illus-overlay small {
+  color: var(--gold);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 0.4rem;
+}
+
+/* ─── Music ──────────────────────────────────────────────────── */
+#music {
+  background: #111;
+  color: var(--paper);
+}
+
+#music .section-title { color: var(--paper); }
+#music .section-label { color: var(--teal); }
+#music .section-sub   { color: var(--smoke); }
+
+.tracks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.track-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.8rem;
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.track-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--teal);
+  transform: scaleY(0);
+  transition: transform 0.25s;
+}
+
+.track-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(42, 123, 123, 0.4);
+}
+
+.track-card:hover::before {
+  transform: scaleY(1);
+}
+
+.play-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  color: var(--paper);
+}
+
+.track-card:hover .play-btn {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+
+.track-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.track-title {
+  font-family: var(--ff-serif);
+  font-size: 1rem;
+  color: var(--paper);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-meta {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-top: 0.2rem;
+}
+
+.track-wave {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 28px;
+}
+
+.track-wave span {
+  display: block;
+  width: 3px;
+  background: var(--teal);
+  border-radius: 2px;
+  animation: wave 1s ease-in-out infinite alternate;
+  opacity: 0.4;
+}
+
+.track-card:hover .track-wave span {
+  opacity: 1;
+}
+
+/* ─── Services ───────────────────────────────────────────────── */
+#services {
+  background: var(--cream);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.service-card {
+  padding: 2.5rem 2rem;
+  border-top: 3px solid var(--ink);
+  background: var(--paper);
+  transition: transform 0.25s;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+}
+
+.service-icon {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.service-name {
+  font-family: var(--ff-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+
+.service-desc {
+  color: var(--smoke);
+  font-size: 0.8rem;
+  line-height: 1.9;
+}
+
+.service-price {
+  margin-top: 1.5rem;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  color: var(--rust);
+}
+
+/* ─── Contact ────────────────────────────────────────────────── */
+#contact {
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  padding: 8rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#contact::before {
+  content: 'KONTAKT';
+  font-family: var(--ff-display);
+  font-size: 28vw;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+#contact .section-label { color: var(--gold); }
+#contact .section-title { color: var(--paper); }
+#contact .section-sub   {
+  color: var(--smoke);
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.contact-email {
+  font-family: var(--ff-display);
+  font-size: clamp(1.5rem, 4vw, 3.5rem);
+  color: var(--gold);
+  text-decoration: none;
+  display: block;
+  margin: 2rem auto;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+
+.contact-email:hover {
+  color: var(--rust);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.social-links a {
+  color: var(--smoke);
+  text-decoration: none;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.social-links a:hover {
+  color: var(--gold);
+}
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+footer {
+  background: #000;
+  color: var(--smoke);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ─── Animations ─────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes wave {
+  from { height: 4px; }
+  to   { height: 22px; }
+}
+
+/* ─── Scroll Reveal ──────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  nav {
+    padding: 1rem 1.5rem;
+  }
+
+  #hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .hero-right {
+    display: none;
+  }
+
+  .hero-left {
+    padding: 5rem 2rem 3rem;
+  }
+
+  section {
+    padding: 4rem 1.5rem;
+  }
+
+  #about {
+    grid-template-columns: 1fr;
+  }
+
+  .about-visual {
+    display: none;
+  }
+
+  .illus-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .illus-item:nth-child(1) {
+    grid-column: span 2;
+  }
+
+  .tracks {
+    grid-template-columns: 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 1.5rem;
+  }
+}
