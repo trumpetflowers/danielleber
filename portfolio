@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniel Leber — Illustration & Musikproduktion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS Variables ─────────────────────────────────────── */
+    :root {
+      --ink:    #0d0d0d;
+      --paper:  #f5f0e8;
+      --cream:  #ede8da;
+      --rust:   #c94f2a;
+      --gold:   #d4a843;
+      --teal:   #2a7b7b;
+      --smoke:  #888070;
+      --ff-display: 'Bebas Neue', sans-serif;
+      --ff-serif:   'DM Serif Display', serif;
+      --ff-mono:    'Space Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--ff-mono);
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* ─── Grain overlay ─────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .5;
+    }
+
+    /* ─── Nav ───────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(245,240,232,.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(13,13,13,.08);
+    }
+
+    .nav-logo {
+      font-family: var(--ff-display);
+      font-size: 1.5rem;
+      letter-spacing: .12em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--smoke);
+      font-size: .75rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--rust); }
+
+    /* ─── Hero ──────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 3rem 5rem 5rem;
+    }
+
+    .hero-eyebrow {
+      font-size: .7rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 1.5rem;
+      animation: fadeUp .8s ease both;
+    }
+
+    h1.hero-name {
+      font-family: var(--ff-display);
+      font-size: clamp(5rem, 10vw, 9rem);
+      line-height: .9;
+      letter-spacing: .03em;
+      color: var(--ink);
+      animation: fadeUp .8s .1s ease both;
+    }
+
+    h1.hero-name span { color: var(--rust); }
+
+    .hero-tagline {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--smoke);
+      margin-top: 1.8rem;
+      animation: fadeUp .8s .2s ease both;
+    }
+
+    .hero-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 2rem 0;
+      animation: fadeUp .8s .3s ease both;
+    }
+
+    .hero-desc {
+      max-width: 400px;
+      color: var(--smoke);
+      line-height: 1.9;
+      animation: fadeUp .8s .4s ease both;
+    }
+
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1.2rem;
+      animation: fadeUp .8s .5s ease both;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: .8rem 2rem;
+      font-family: var(--ff-mono);
+      font-size: .75rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1.5px solid var(--ink);
+      color: var(--ink);
+      transition: all .25s;
+      cursor: pointer;
+    }
+    .btn:hover { background: var(--ink); color: var(--paper); }
+    .btn-fill { background: var(--rust); border-color: var(--rust); color: #fff; }
+    .btn-fill:hover { background: var(--ink); border-color: var(--ink); }
+
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      animation: fadeIn 1s .3s ease both;
+    }
+
+    /* Big decorative letter */
+    .hero-right::before {
+      content: 'DL';
+      font-family: var(--ff-display);
+      font-size: 40vw;
+      color: var(--cream);
+      position: absolute;
+      right: -5vw;
+      top: 50%;
+      transform: translateY(-50%);
+      line-height: 1;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-art-block {
+      position: relative;
+      z-index: 1;
+      width: 320px;
+      height: 420px;
+    }
+
+    /* SVG illustration placeholder — editorial feel */
+    .hero-art-block svg { width: 100%; height: 100%; }
+
+    .floating-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -30px;
+      width: 110px;
+      height: 110px;
+      background: var(--rust);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: var(--ff-display);
+      font-size: .85rem;
+      letter-spacing: .1em;
+      color: #fff;
+      line-height: 1.2;
+      animation: spin 20s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── Sections shared ───────────────────────────────────── */
+    section { padding: 6rem 5rem; }
+    .section-label {
+      font-size: .65rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: .8rem;
+    }
+    .section-title {
+      font-family: var(--ff-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: .04em;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      color: var(--smoke);
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── About ─────────────────────────────────────────────── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    #about .section-label { color: var(--gold); }
+    #about .section-title { color: var(--paper); }
+    #about .section-sub   { color: var(--smoke); }
+
+    .about-text p { color: rgba(245,240,232,.75); line-height: 2; margin-bottom: 1rem; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .stat {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 1.2rem;
+    }
+    .stat-num {
+      font-family: var(--ff-display);
+      font-size: 3rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      margin-top: .3rem;
+    }
+
+    .about-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .about-frame {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 3/4;
+      border: 1px solid rgba(212,168,67,.3);
+      position: relative;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+    .about-frame svg { width: 100%; height: 100%; }
+
+    /* ─── Illustration grid ─────────────────────────────────── */
+    #illustration { background: var(--paper); }
+
+    .illus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 1.5rem;
+    }
+
+    .illus-item {
+      position: relative;
+      overflow: hidden;
+      cursor: crosshair;
+      background: var(--cream);
+    }
+    .illus-item:nth-child(1) { grid-column: span 2; aspect-ratio: 16/9; }
+    .illus-item:nth-child(2) { aspect-ratio: 3/4; }
+    .illus-item:nth-child(3) { aspect-ratio: 1; }
+    .illus-item:nth-child(4) { aspect-ratio: 1; }
+    .illus-item:nth-child(5) { aspect-ratio: 3/4; }
+
+    .illus-item svg { width: 100%; height: 100%; display: block; }
+
+    .illus-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--ink);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity .3s;
+    }
+    .illus-item:hover .illus-overlay { opacity: .85; }
+    .illus-overlay span {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      color: var(--paper);
+      font-size: 1.1rem;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .illus-overlay small {
+      color: var(--gold);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-top: .4rem;
+    }
+
+    /* ─── Music ─────────────────────────────────────────────── */
+    #music {
+      background: #111;
+      color: var(--paper);
+    }
+    #music .section-title { color: var(--paper); }
+    #music .section-label { color: var(--teal); }
+    #music .section-sub   { color: var(--smoke); }
+
+    .tracks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .track-card {
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 1.8rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      transition: border-color .2s, background .2s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .track-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--teal);
+      transform: scaleY(0);
+      transition: transform .25s;
+    }
+    .track-card:hover { background: rgba(255,255,255,.04); border-color: rgba(42,123,123,.4); }
+    .track-card:hover::before { transform: scaleY(1); }
+
+    .play-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all .2s;
+      color: var(--paper);
+    }
+    .track-card:hover .play-btn {
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .track-info { flex: 1; min-width: 0; }
+    .track-title {
+      font-family: var(--ff-serif);
+      font-size: 1rem;
+      color: var(--paper);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .track-meta {
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      margin-top: .2rem;
+    }
+
+    .track-wave {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      height: 28px;
+    }
+    .track-wave span {
+      display: block;
+      width: 3px;
+      background: var(--teal);
+      border-radius: 2px;
+      animation: wave 1s ease-in-out infinite alternate;
+      opacity: .4;
+    }
+    .track-card:hover .track-wave span { opacity: 1; }
+    @keyframes wave {
+      from { height: 4px; }
+      to   { height: 22px; }
+    }
+
+    /* ─── Services ──────────────────────────────────────────── */
+    #services { background: var(--cream); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .service-card {
+      padding: 2.5rem 2rem;
+      border-top: 3px solid var(--ink);
+      background: var(--paper);
+      transition: transform .25s;
+    }
+    .service-card:hover { transform: translateY(-6px); }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+    }
+    .service-name {
+      font-family: var(--ff-display);
+      font-size: 1.6rem;
+      letter-spacing: .05em;
+      margin-bottom: .6rem;
+    }
+    .service-desc {
+      color: var(--smoke);
+      font-size: .8rem;
+      line-height: 1.9;
+    }
+    .service-price {
+      margin-top: 1.5rem;
+      font-family: var(--ff-serif);
+      font-style: italic;
+      color: var(--rust);
+    }
+
+    /* ─── Contact ───────────────────────────────────────────── */
+    #contact {
+      background: var(--ink);
+      color: var(--paper);
+      text-align: center;
+      padding: 8rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: 'KONTAKT';
+      font-family: var(--ff-display);
+      font-size: 28vw;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      color: rgba(255,255,255,.03);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    #contact .section-label { color: var(--gold); }
+    #contact .section-title { color: var(--paper); }
+    #contact .section-sub   { color: var(--smoke); max-width: 500px; margin: 0 auto 2rem; }
+
+    .contact-email {
+      font-family: var(--ff-display);
+      font-size: clamp(1.5rem, 4vw, 3.5rem);
+      color: var(--gold);
+      text-decoration: none;
+      display: block;
+      margin: 2rem auto;
+      letter-spacing: .05em;
+      transition: color .2s;
+    }
+    .contact-email:hover { color: var(--rust); }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .social-links a {
+      color: var(--smoke);
+      text-decoration: none;
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .social-links a:hover { color: var(--gold); }
+
+    /* ─── Footer ────────────────────────────────────────────── */
+    footer {
+      background: #000;
+      color: var(--smoke);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5rem;
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    /* ─── Animations ────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ─── Scroll reveal ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Responsive ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      #hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { display: none; }
+      .hero-left { padding: 5rem 2rem 3rem; }
+      section { padding: 4rem 1.5rem; }
+      #about { grid-template-columns: 1fr; }
+      .about-visual { display: none; }
+      .illus-grid { grid-template-columns: 1fr 1fr; }
+      .illus-item:nth-child(1) { grid-column: span 2; }
+      .tracks { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: .5rem; text-align: center; padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav>
+    <a class="nav-logo" href="#">Daniel Leber</a>
+    <ul class="nav-links">
+      <li><a href="#about">Über mich</a></li>
+      <li><a href="#illustration">Illustration</a></li>
+      <li><a href="#music">Musik</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Portfolio — Berlin · 2024</p>
+      <h1 class="hero-name">Daniel<br><span>Leber</span></h1>
+      <p class="hero-tagline">Illustration & Musikproduktion</p>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">
+        Zwischen Zeichenstift und Synthesizer: Visuelle Welten, die klingen —
+        und Klänge, die man sehen kann. Kreative Werke an der Schnittstelle zweier Kunstformen.
+      </p>
+      <div class="hero-cta">
+        <a href="#illustration" class="btn btn-fill">Portfolio ansehen</a>
+        <a href="#contact" class="btn">Kontakt aufnehmen</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-art-block">
+        <!-- Editorial SVG illustration -->
+        <svg viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="420" fill="#ede8da"/>
+          <!-- Background shapes -->
+          <circle cx="200" cy="120" r="90" fill="#c94f2a" opacity=".12"/>
+          <circle cx="80"  cy="300" r="60" fill="#2a7b7b" opacity=".15"/>
+          <!-- Abstract figure: illustration+music -->
+          <rect x="60" y="80" width="4" height="120" rx="2" fill="#0d0d0d" opacity=".7"/>
+          <rect x="80" y="100" width="4" height="80"  rx="2" fill="#0d0d0d" opacity=".5"/>
+          <rect x="100" y="60" width="4" height="140" rx="2" fill="#c94f2a" opacity=".9"/>
+          <rect x="120" y="90" width="4" height="100" rx="2" fill="#0d0d0d" opacity=".5"/>
+          <rect x="140" y="70" width="4" height="130" rx="2" fill="#2a7b7b" opacity=".8"/>
+          <rect x="160" y="50" width="4" height="150" rx="2" fill="#0d0d0d" opacity=".4"/>
+          <rect x="180" y="80" width="4" height="100" rx="2" fill="#d4a843" opacity=".9"/>
+          <rect x="200" y="60" width="4" height="130" rx="2" fill="#0d0d0d" opacity=".5"/>
+          <rect x="220" y="90" width="4" height="90"  rx="2" fill="#c94f2a" opacity=".6"/>
+          <!-- Pen/brush strokes -->
+          <path d="M 40 260 Q 120 220 200 270 Q 240 295 280 260" stroke="#0d0d0d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M 40 280 Q 130 240 210 290 Q 250 315 280 280" stroke="#0d0d0d" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".4"/>
+          <!-- Decorative star/cross -->
+          <line x1="250" y1="340" x2="250" y2="380" stroke="#d4a843" stroke-width="2"/>
+          <line x1="230" y1="360" x2="270" y2="360" stroke="#d4a843" stroke-width="2"/>
+          <!-- Label -->
+          <text x="40" y="400" font-family="'Bebas Neue',sans-serif" font-size="18" fill="#0d0d0d" opacity=".15" letter-spacing="4">DANIEL LEBER</text>
+        </svg>
+        <div class="floating-badge">Kunst &amp; Sound</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ── -->
+  <section id="about">
+    <div class="about-text reveal">
+      <p class="section-label">Über mich</p>
+      <h2 class="section-title">Zwei<br>Welten.<br>Eine<br>Stimme.</h2>
+      <p class="section-sub">Illustrator · Musikproduzent · Gestalter</p>
+      <p>Daniel Leber ist ein Berliner Künstler, dessen Werk sich zwischen visueller Illustration und elektronischer Musikproduktion bewegt. Er schafft Bilder, die Rhythmus haben — und Musik, die Bilder malt.</p>
+      <p>Seine Illustrationen sind geprägt von expressiven Linien, reduzierten Farbpaletten und einer Erzählkraft, die Geschichten ohne Worte erzählt. In der Musikproduktion verbindet er organische Sounds mit präzisen elektronischen Strukturen.</p>
+      <div class="about-stats">
+        <div class="stat"><div class="stat-num">120+</div><div class="stat-label">Illustrationen</div></div>
+        <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Tracks & Beats</div></div>
+        <div class="stat"><div class="stat-num">8</div><div class="stat-label">Jahre Erfahrung</div></div>
+        <div class="stat"><div class="stat-num">30+</div><div class="stat-label">Kundenprojekte</div></div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="about-frame">
+        <svg viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg">
+          <rect width="360" height="480" fill="#1a1a1a"/>
+          <rect x="0" y="0" width="360" height="480" fill="url(#grad1)"/>
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#2a7b7b;stop-opacity:.3"/>
+              <stop offset="100%" style="stop-color:#c94f2a;stop-opacity:.2"/>
+            </linearGradient>
+          </defs>
+          <!-- Abstract portrait suggestion -->
+          <ellipse cx="180" cy="160" rx="70" ry="85" fill="none" stroke="#d4a843" stroke-width="1" opacity=".5"/>
+          <line x1="180" y1="245" x2="180" y2="380" stroke="#d4a843" stroke-width="1" opacity=".3"/>
+          <line x1="100" y1="300" x2="260" y2="300" stroke="#d4a843" stroke-width="1" opacity=".3"/>
+          <!-- Musical note suggestion -->
+          <circle cx="270" cy="80" r="18" fill="none" stroke="#2a7b7b" stroke-width="1.5"/>
+          <line x1="270" y1="62" x2="270" y2="30" stroke="#2a7b7b" stroke-width="1.5"/>
+          <line x1="270" y1="30" x2="295" y2="20" stroke="#2a7b7b" stroke-width="1.5"/>
+          <!-- Type watermark -->
+          <text x="20" y="460" font-family="monospace" font-size="9" fill="rgba(245,240,232,.2)" letter-spacing="3">DANIEL LEBER © 2024</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Illustration ── -->
+  <section id="illustration">
+    <p class="section-label reveal">Illustration</p>
+    <h2 class="section-title reveal">Visuelle<br>Arbeiten</h2>
+    <p class="section-sub reveal">Charaktere · Editorial · Concept Art</p>
+
+    <div class="illus-grid">
+      <div class="illus-item reveal">
+        <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="450" fill="#d4c9b8"/>
+          <circle cx="150" cy="225" r="140" fill="#c94f2a" opacity=".3"/>
+          <circle cx="650" cy="225" r="100" fill="#2a7b7b" opacity=".25"/>
+          <path d="M0 300 Q200 200 400 280 Q600 360 800 250 L800 450 L0 450Z" fill="#0d0d0d" opacity=".06"/>
+          <text x="50" y="230" font-family="'Bebas Neue',sans-serif" font-size="80" fill="#0d0d0d" opacity=".12" letter-spacing="6">EDITORIAL</text>
+          <line x1="100" y1="180" x2="700" y2="180" stroke="#0d0d0d" stroke-width="1" opacity=".15"/>
+          <line x1="100" y1="270" x2="700" y2="270" stroke="#0d0d0d" stroke-width="1" opacity=".15"/>
+        </svg>
+        <div class="illus-overlay">
+          <span>The Quiet Observer</span>
+          <small>Editorial Illustration · 2024</small>
+        </div>
+      </div>
+
+      <div class="illus-item reveal">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="400" fill="#1a2a2a"/>
+          <circle cx="150" cy="150" r="80" fill="#2a7b7b" opacity=".4"/>
+          <path d="M60 300 Q150 250 240 300 L240 400 L60 400Z" fill="#d4a843" opacity=".3"/>
+          <rect x="130" y="60" width="40" height="5" rx="2" fill="#d4a843" opacity=".7"/>
+          <text x="30" y="360" font-family="'Bebas Neue',sans-serif" font-size="24" fill="rgba(245,240,232,.2)" letter-spacing="3">FIGURE</text>
+        </svg>
+        <div class="illus-overlay">
+          <span>Tiefblau</span>
+          <small>Charakterstudie · 2024</small>
+        </div>
+      </div>
+
+      <div class="illus-item reveal">
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="300" fill="#f0e8d8"/>
+          <rect x="40" y="40" width="220" height="220" fill="none" stroke="#c94f2a" stroke-width="2"/>
+          <rect x="60" y="60" width="180" height="180" fill="#c94f2a" opacity=".08"/>
+          <line x1="40" y1="40" x2="260" y2="260" stroke="#0d0d0d" stroke-width="1" opacity=".2"/>
+          <circle cx="150" cy="150" r="50" fill="#c94f2a" opacity=".5"/>
+          <text x="100" y="295" font-family="monospace" font-size="8" fill="#888" letter-spacing="2">SERIES 01</text>
+        </svg>
+        <div class="illus-overlay">
+          <span>Kreis & Quadrat</span>
+          <small>Abstract Series · 2023</small>
+        </div>
+      </div>
+
+      <div class="illus-item reveal">
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="300" fill="#0d0d0d"/>
+          <circle cx="150" cy="150" r="100" fill="none" stroke="#d4a843" stroke-width="1.5" stroke-dasharray="8 4"/>
+          <circle cx="150" cy="150" r="60" fill="#d4a843" opacity=".15"/>
+          <circle cx="150" cy="150" r="20" fill="#d4a843" opacity=".8"/>
+          <!-- Rays -->
+          <line x1="150" y1="30"  x2="150" y2="60"  stroke="#d4a843" stroke-width="1.5" opacity=".6"/>
+          <line x1="150" y1="240" x2="150" y2="270" stroke="#d4a843" stroke-width="1.5" opacity=".6"/>
+          <line x1="30"  y1="150" x2="60"  y2="150" stroke="#d4a843" stroke-width="1.5" opacity=".6"/>
+          <line x1="240" y1="150" x2="270" y2="150" stroke="#d4a843" stroke-width="1.5" opacity=".6"/>
+        </svg>
+        <div class="illus-overlay">
+          <span>Goldenes Mandala</span>
+          <small>Geometrische Illustration · 2023</small>
+        </div>
+      </div>
+
+      <div class="illus-item reveal">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="400" fill="#e8e0d0"/>
+          <rect x="0" y="200" width="300" height="200" fill="#0d0d0d" opacity=".06"/>
+          <path d="M0 200 Q75 160 150 200 Q225 240 300 200 L300 400 L0 400Z" fill="#2a7b7b" opacity=".2"/>
+          <!-- Sound-wave like lines -->
+          <line x1="50" y1="120" x2="50" y2="280" stroke="#0d0d0d" stroke-width="2" opacity=".4"/>
+          <line x1="90" y1="80"  x2="90" y2="320" stroke="#c94f2a" stroke-width="2" opacity=".7"/>
+          <line x1="130" y1="60" x2="130" y2="340" stroke="#0d0d0d" stroke-width="2" opacity=".3"/>
+          <line x1="170" y1="100" x2="170" y2="300" stroke="#2a7b7b" stroke-width="2" opacity=".6"/>
+          <line x1="210" y1="80"  x2="210" y2="320" stroke="#0d0d0d" stroke-width="2" opacity=".3"/>
+          <line x1="250" y1="120" x2="250" y2="280" stroke="#d4a843" stroke-width="2" opacity=".8"/>
+          <text x="30" y="380" font-family="'Bebas Neue',sans-serif" font-size="20" fill="#0d0d0d" opacity=".1" letter-spacing="3">SOUNDSCAPE</text>
+        </svg>
+        <div class="illus-overlay">
+          <span>Soundscape I</span>
+          <small>Mixed Media · 2024</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Music ── -->
+  <section id="music">
+    <p class="section-label reveal">Musikproduktion</p>
+    <h2 class="section-title reveal">Klang­welten</h2>
+    <p class="section-sub reveal">Beats · Ambient · Soundtrack · Electronic</p>
+
+    <div class="tracks">
+
+      <div class="track-card reveal">
+        <div class="play-btn">
+          <svg width="14" height="16" viewBox="0 0 14 16"><polygon points="0,0 14,8 0,16" fill="currentColor"/></svg>
+        </div>
+        <div class="track-info">
+          <div class="track-title">Fog Over Mitte</div>
+          <div class="track-meta">Ambient · 4:32</div>
+        </div>
+        <div class="track-wave">
+          <span style="animation-delay:.0s"></span>
+          <span style="animation-delay:.1s"></span>
+          <span style="animation-delay:.2s"></span>
+          <span style="animation-delay:.3s"></span>
+          <span style="animation-delay:.4s"></span>
+          <span style="animation-delay:.2s"></span>
+          <span style="animation-delay:.1s"></span>
+        </div>
+      </div>
+
+      <div class="track-card reveal">
+        <div class="play-btn">
+          <svg width="14" height="16" viewBox="0 0 14 16"><polygon points="0,0 14,8 0,16" fill="currentColor"/></svg>
+        </div>
+        <div class="track-info">
+          <div class="track-title">Kupfer & Stahl</div>
+          <div class="track-meta">Industrial Beat · 3:18</div>
+        </div>
+        <div class="track-wave">
+          <span style="animation-delay:.3s"></span>
+          <span style="animation-delay:.1s"></span>
+          <span style="animation-delay:.4s"></span>
+          <span style="animation-delay:.0s"></span>
+          <span style="animation-delay:.2s"></span>
+          <span style="animation-delay:.4s"></span>
+          <span style="animation-delay:.1s"></span>
+        </div>
+      </div>
+
+      <div class="track-card reveal">
+        <div class="play-btn">
+          <svg width="14" height="16" viewBox="0 0 14 16"><polygon points="0,0 14,8 0,16" fill="currentColor"/></svg>
+        </div>
+        <div class="track-info">
+          <div class="track-title">Stille zwischen Zügen</div>
+          <div class="track-meta">Lo-Fi · 5:01</div>
+        </div>
+        <div class="track-wave">
+          <span style="animation-delay:.2s"></span>
+          <span style="animation-delay:.4s"></span>
+          <span style="animation-delay:.0s"></span>
+          <span style="animation-delay:.3s"></span>
+          <span style="animation-delay:.1s"></span>
+          <span style="animation-delay:.0s"></span>
+          <span style="animation-delay:.3s"></span>
+        </div>
+      </div>
+
+      <div class="track-card reveal">
+        <div class="play-btn">
+          <svg width="14" height="16" viewBox="0 0 14 16"><polygon points="0,0 14,8 0,16" fill="currentColor"/></svg>
+        </div>
+        <div class="track-info">
+          <div class="track-title">Licht durch Beton</div>
+          <div class="track-meta">Electronic · 6:44</div>
+        </div>
+        <div class="track-wave">
+          <span style="animation-delay:.1s"></span>
+          <span style="animation-delay:.3s"></span>
+          <span style="animation-delay:.2s"></span>
+          <span style="animation-delay:.0s"></span>
+          <span style="animation-delay:.4s"></span>
+          <span style="animation-delay:.2s"></span>
+          <span style="animation-delay:.0s"></span>
+        </div>
+      </div>
+
+      <div class="track-card reveal">
+        <div class="play-btn">
+          <svg width="14" height="16" viewBox="0 0 14 16"><polygon points="0,0 14,8 0,16" fill="currentColor"/></svg>
+        </div>
+        <div class="track-info">
+          <div class="track-title">Neon Regen</div>
+          <div class="track-meta">Synthwave · 4:17</div>
+        </div>
+        <div class="track-wave">
+          <span style="animation-delay:.4s"></span>
+          <span style="animation-delay:.0s"></span>
+          <span style="animation-delay:.3s"></span>
+          <span style="animation-delay:.1s"></span>
+          <span style="animation-delay:.2s"></span>
+          <span style="animation-delay:.1s"></span>
+          <span style="animation-delay:.4s"></span>
+        </div>
+      </div>
+
+      <div class="track-card reveal">
+        <div class="play-btn">
+          <svg width="14" height="16" viewBox="0 0 14 16"><polygon points="0,0 14,8 0,16" fill="currentColor"/></svg>
+        </div>
+        <div class="track-info">
+          <div class="track-title">Analog Dreams</div>
+          <div class="track-meta">Experimental · 7:12</div>
+        </div>
+        <div class="track-wave">
+          <span style="animation-delay:.0s"></span>
+          <span style="animation-delay:.2s"></span>
+          <span style="animation-delay:.4s"></span>
+          <span style="animation-delay:.1s"></span>
+          <span style="animation-delay:.3s"></span>
+          <span style="animation-delay:.0s"></span>
+          <span style="animation-delay:.2s"></span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Services ── -->
+  <section id="services">
+    <p class="section-label reveal">Was ich anbiete</p>
+    <h2 class="section-title reveal">Services</h2>
+    <p class="section-sub reveal">Für Projekte, die Eindruck hinterlassen</p>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">✏️</div>
+        <div class="service-name">Illustration</div>
+        <div class="service-desc">Charakterdesign, Editorial-Illustration, Buchcover, Poster, Konzeptkunst — handgefertigt mit digitalem Finish oder rein analog.</div>
+        <div class="service-price">auf Anfrage</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🎛️</div>
+        <div class="service-name">Musik­produktion</div>
+        <div class="service-desc">Beats, Soundtracks für Film/Video, Jingles, Podcast-Musik, ambient Kompositionen — individuell produziert und gemischt.</div>
+        <div class="service-price">ab 250 €</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🎨</div>
+        <div class="service-name">Art Direction</div>
+        <div class="service-desc">Visuelle Konzeption für Alben, Merch, Social Media Kampagnen — Bild und Klang als kohärentes Gesamtwerk gedacht.</div>
+        <div class="service-price">auf Anfrage</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact">
+    <p class="section-label reveal">Lass uns reden</p>
+    <h2 class="section-title reveal">Projekt<br>anfragen</h2>
+    <p class="section-sub reveal">Hast du ein Projekt im Kopf? Ich freue mich über jede Anfrage — egal ob Illustration, Musik oder beides.</p>
+    <a href="mailto:hallo@danielleber.de" class="contact-email reveal">hallo@danielleber.de</a>
+    <a href="#contact" class="btn btn-fill reveal" style="display:inline-block">Nachricht senden</a>
+    <div class="social-links reveal">
+      <a href="#">Instagram</a>
+      <a href="#">Behance</a>
+      <a href="#">SoundCloud</a>
+      <a href="#">Bandcamp</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <span>© 2024 Daniel Leber</span>
+    <span>Illustration & Musikproduktion · Berlin</span>
+    <span>Impressum · Datenschutz</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Wave animation stagger on hover
+    document.querySelectorAll('.track-wave span').forEach((span, i) => {
+      span.style.animationDelay = (i * 0.1) + 's';
+      span.style.height = Math.floor(Math.random() * 18 + 4) + 'px';
+    });
+  </script>
+</body>
+</html>
